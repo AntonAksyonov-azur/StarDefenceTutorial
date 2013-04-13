@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -28,15 +29,17 @@ namespace StarDefenceTutorial.com.andaforce.game.screens
             var gameplayService = AXNA.Game.Services.GetService(typeof (GameplayService)) as GameplayService;
             if (gameplayService != null)
             {
-                String time = String.Format("You survived for {0:f2} seconds total", gameplayService.ElapsedGameTime);
-                String kills = String.Format("\nYou killed {0} enemies with {1} shots total ({2} accuracy)", gameplayService.TotalHits,
-                                             gameplayService.TotalShots, gameplayService.GetAccuracyString());
-                String level = String.Format("\nYou reached level {0}", gameplayService.Level);
-                String score = String.Format("\nYou scored {0}", gameplayService.Score);
+                StringBuilder stringBuilder = new StringBuilder();
 
-                String totalScore = String.Format("\n\nYour total score is: {0}", gameplayService.GetTotalScoreString());
+                stringBuilder.Append(String.Format("You survived for {0:f0} seconds total", gameplayService.ElapsedGameTime));
+                stringBuilder.Append(String.Format("\nYou killed {0} enemies with {1} shots total ({2} accuracy)", gameplayService.TotalHits,
+                                             gameplayService.TotalShots, gameplayService.GetAccuracyString()));
+                stringBuilder.Append(String.Format("\nYou reached level {0}", gameplayService.Level));
+                stringBuilder.Append(String.Format("\nYou scored {0}", gameplayService.Score));
 
-                var recordText = new TextString(time + kills + level + score + totalScore, spriteFont);
+                stringBuilder.Append(String.Format("\n\nYour total score is: {0}", gameplayService.GetTotalScoreString()));
+
+                var recordText = new TextString(stringBuilder.ToString(), spriteFont);
                 var labelRecordText = new TextLabel(recordText, 10, 40);
                 AddComponent(labelRecordText);
 

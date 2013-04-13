@@ -1,3 +1,0 @@
-F:\Z\_Progz\XNA\StarDefenceTutorial\StarDefenceTutorial\StarDefenceTutorialContent\obj\x86\Debug\ResolveAssemblyReference.cache
-D:\Dropbox\_work\StarDefenceTutorial\StarDefenceTutorial\StarDefenceTutorialContent\obj\x86\Debug\ResolveAssemblyReference.cache
-F:\Dropbox\_work\StarDefenceTutorial\StarDefenceTutorial\StarDefenceTutorialContent\obj\x86\Debug\ResolveAssemblyReference.cache

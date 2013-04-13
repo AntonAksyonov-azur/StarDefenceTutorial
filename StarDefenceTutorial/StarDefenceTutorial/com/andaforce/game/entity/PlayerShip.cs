@@ -32,7 +32,7 @@ namespace StarDefenceTutorial.com.andaforce.game.entity
 
                     UpdateHorizontalMoveKeys(gameTime);
                     UpdateVerticalMoveKeys(gameTime);
-                    UpdateShootKeys(gameTime);
+                    UpdateShootKeys();
 
                     UpdateMove(gameTime);
                     UpdateCollision();

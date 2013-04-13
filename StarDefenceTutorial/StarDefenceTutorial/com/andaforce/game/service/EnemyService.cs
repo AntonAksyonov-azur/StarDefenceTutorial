@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using StarDefenceTutorial.com.andaforce.axna;
 using StarDefenceTutorial.com.andaforce.axna.graphics;
 using StarDefenceTutorial.com.andaforce.axna.screen.manager;
+using StarDefenceTutorial.com.andaforce.game.config;
 using StarDefenceTutorial.com.andaforce.game.constants;
 using StarDefenceTutorial.com.andaforce.game.entity;
 using StarDefenceTutorial.com.andaforce.game.service.gameplay;
@@ -37,8 +38,8 @@ namespace StarDefenceTutorial.com.andaforce.game.service
                 int enemyMaxSpeed = gameplayService.GetEnemiesSpeedBasedOnLevel();
 
                 var enemy = new Enemy(
-                    AXNA.GraphicsDevice.Viewport.Width,
-                    AXNA.Rnd.Next(0, AXNA.GraphicsDevice.Viewport.Height),
+                    Configuration.GetInstance().ScreenWidth,
+                    AXNA.Rnd.Next(0, Configuration.GetInstance().ScreenHeight),
                     24, 24,
                     new Vector2(
                         AXNA.Rnd.Next(-enemyMaxSpeed, enemyMaxSpeed),
@@ -84,11 +85,11 @@ namespace StarDefenceTutorial.com.andaforce.game.service
             }
         }
 
-        public void MoveEnemies(int x)
+        public void MoveEnemies(int scrollSpeed)
         {
             foreach (Enemy e in _enemies)
             {
-                e.Position.X += x;
+                e.Position.X += scrollSpeed;
             }
         }
 

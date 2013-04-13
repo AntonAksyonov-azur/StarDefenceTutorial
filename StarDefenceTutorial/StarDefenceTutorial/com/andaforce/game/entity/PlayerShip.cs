@@ -29,9 +29,6 @@ namespace StarDefenceTutorial.com.andaforce.game.entity
                 case EntityState.Idle:
                 case EntityState.Move:
                     SwitchState(EntityState.Idle, LeftOrientation);
-
-                    UpdateHorizontalMoveKeys(gameTime);
-                    UpdateVerticalMoveKeys(gameTime);
                     UpdateShootKeys();
 
                     UpdateMove(gameTime);
@@ -71,7 +68,8 @@ namespace StarDefenceTutorial.com.andaforce.game.entity
 
         protected override void UpdateMove(GameTime gameTime)
         {
-            // Пустая реализация
+            UpdateHorizontalMoveKeys(gameTime);
+            UpdateVerticalMoveKeys(gameTime);
         }
 
         private void UpdateHorizontalMoveKeys(GameTime gameTime)

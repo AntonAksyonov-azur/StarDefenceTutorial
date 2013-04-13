@@ -16,7 +16,7 @@ namespace StarDefenceTutorial.com.andaforce.game.service
         public Texture2D LeftBulletGraphics;
         public Texture2D RightBulletGraphics;
         private float _bulletElapsedShootTime = 999; // Для того, чтобы первое нажатие сразу выпустило пулю
-        private bool _isTripleMode = true;
+        private bool _isTripleMode;
         private bool _playerShipLeftOrientation;
         private Vector2 _playerShipPosition;
 
@@ -26,7 +26,7 @@ namespace StarDefenceTutorial.com.andaforce.game.service
             LeftBulletGraphics = leftBulletGraphics;
             RightBulletGraphics = rightBulletGraphics;
 
-            BulletShootInterval = Configuration.GetInstance().Firerate;
+            BulletShootInterval = Configuration.GetInstance().PlayerShipFirerate;
         }
 
         public override void CreateEntity()
@@ -45,11 +45,10 @@ namespace StarDefenceTutorial.com.andaforce.game.service
             }
         }
 
-        private Bullet CreateBullet(double y, int speed, Image img)
+        private Bullet CreateBullet(float y, int speed, Image img)
         {
             var bullet = new Bullet(_playerShipPosition.X, y, 16, 1, speed);
             bullet.SetUpGraphics(img, img, img, EntityState.Move);
-            ParentScreen.AddComponent(bullet);
             return bullet;
         }
 

@@ -10,7 +10,7 @@
         public int PlayerShipVelocity = 100;
 
         // BulletService
-        public float Firerate = 0.3f;
+        public float PlayerShipFirerate = 0.3f;
         public int BulletVelocity = 300;
 
         // Powerups time values

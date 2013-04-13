@@ -124,7 +124,7 @@ namespace StarDefenceTutorial.com.andaforce.game.screens
             {
                 existedEnemyService.Reset();
             }
-            existedEnemyService.CreateEnemy();
+            existedEnemyService.CreateEntity();
         }
 
         // TODO Загружать текстуры заднего плана один раз, не перезагружать при повторном запуске игры

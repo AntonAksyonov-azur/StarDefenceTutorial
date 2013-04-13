@@ -19,11 +19,10 @@ namespace StarDefenceTutorial.com.andaforce.game.service
         private Vector2 _playerShipPosition;
 
         public BulletService(Screen parentScreen,
-                             Texture2D leftBulletGraphics, Texture2D rightBulletGraphics)
+                             Texture2D leftBulletGraphics, Texture2D rightBulletGraphics) : base (parentScreen)
         {
             LeftBulletGraphics = leftBulletGraphics;
             RightBulletGraphics = rightBulletGraphics;
-            ParentScreen = parentScreen;
         }
 
         public override void CreateEntity()

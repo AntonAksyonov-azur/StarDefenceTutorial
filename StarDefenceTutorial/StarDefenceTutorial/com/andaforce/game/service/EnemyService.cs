@@ -10,7 +10,7 @@ using StarDefenceTutorial.com.andaforce.game.service.gameplay;
 
 namespace StarDefenceTutorial.com.andaforce.game.service
 {
-    public class EnemyService : AbstractService
+    public class EnemyService : AbstractSpawnService
     {
         private const float EnemyAppearsInterval = 0.5f;
         private readonly List<Enemy> _enemies = new List<Enemy>();
@@ -18,9 +18,8 @@ namespace StarDefenceTutorial.com.andaforce.game.service
         public Texture2D EnemyGraphicsMove;
         private float _enemyElapsedTime;
 
-        public EnemyService(Screen parentScreen, Texture2D moveGraphics, Texture2D deathGraphics)
+        public EnemyService(Screen parentScreen, Texture2D moveGraphics, Texture2D deathGraphics) : base(parentScreen)
         {
-            ParentScreen = parentScreen;
             EnemyGraphicsMove = moveGraphics;
             EnemyGraphicsDeath = deathGraphics;
         }
@@ -30,7 +29,7 @@ namespace StarDefenceTutorial.com.andaforce.game.service
             _enemies.Clear();
         }
 
-        public void CreateEnemy()
+        public override void CreateEntity()
         {
             var gameplayService = AXNA.Game.Services.GetService(typeof (GameplayService)) as GameplayService;
             if (gameplayService != null)
@@ -74,7 +73,7 @@ namespace StarDefenceTutorial.com.andaforce.game.service
                 {
                     if (_enemyElapsedTime > EnemyAppearsInterval)
                     {
-                        CreateEnemy();
+                        CreateEntity();
                         _enemyElapsedTime = 0;
                     }
                     else

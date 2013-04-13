@@ -13,9 +13,8 @@ namespace StarDefenceTutorial.com.andaforce.game.service
         private readonly Texture2D _idle;
         private readonly Texture2D _move;
 
-        public PlayerShipService(Screen parentScreen, Texture2D idle, Texture2D move, Texture2D death)
+        public PlayerShipService(Screen parentScreen, Texture2D idle, Texture2D move, Texture2D death) : base(parentScreen)
         {
-            ParentScreen = parentScreen;
             _idle = idle;
             _move = move;
             _death = death;

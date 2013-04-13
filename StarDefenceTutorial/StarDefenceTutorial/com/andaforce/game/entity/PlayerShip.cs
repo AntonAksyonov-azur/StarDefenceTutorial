@@ -128,5 +128,11 @@ namespace StarDefenceTutorial.com.andaforce.game.entity
                 if (bulletService != null) bulletService.TryShoot(this);
             }
         }
+
+        public void AppyPowerup()
+        {
+            
+
+        }
     }
 }

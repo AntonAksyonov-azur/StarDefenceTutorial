@@ -131,7 +131,7 @@ namespace StarDefenceTutorial.com.andaforce.game.service.gameplay
             _observers[ObserverNames.Accuracy].UpdateTextParameter(GetShootingStatisticString());
         }
 
-        private void ChangeScore(int scoreChange)
+        public void ChangeScore(int scoreChange)
         {
             Score += scoreChange;
             _observers[ObserverNames.Score].UpdateTextParameter(GetScoreString());

@@ -127,6 +127,14 @@
     <Compile Include="com\andaforce\game\config\Configuration.cs" />
     <Compile Include="com\andaforce\game\constants\EntityStates.cs" />
     <Compile Include="com\andaforce\game\constants\ScreenNames.cs" />
+    <Compile Include="com\andaforce\game\entity\powerup\effects\AbstractPowerupEffect.cs" />
+    <Compile Include="com\andaforce\game\entity\powerup\effects\AddLivesPowerupEffect.cs" />
+    <Compile Include="com\andaforce\game\entity\powerup\effects\AddScoresPowerupEffect.cs" />
+    <Compile Include="com\andaforce\game\entity\powerup\effects\IncreaseVelocityPowerupEffect.cs" />
+    <Compile Include="com\andaforce\game\entity\powerup\effects\IncreaseWeaponPowerupEffect.cs" />
+    <Compile Include="com\andaforce\game\entity\powerup\effects\IncreateFireratePowerupEffect.cs" />
+    <Compile Include="com\andaforce\game\entity\powerup\Powerup.cs" />
+    <Compile Include="com\andaforce\game\entity\powerup\PowerupType.cs" />
     <Compile Include="com\andaforce\game\entity\StarDefenceTutorialEntity.cs" />
     <Compile Include="com\andaforce\game\entity\Bullet.cs" />
     <Compile Include="com\andaforce\game\entity\Enemy.cs" />

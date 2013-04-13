@@ -1,4 +1,5 @@
 using StarDefenceTutorial.com.andaforce.axna.screen.manager;
+using StarDefenceTutorial.com.andaforce.game.config;
 using StarDefenceTutorial.com.andaforce.game.constants;
 using StarDefenceTutorial.com.andaforce.game.screens;
 
@@ -17,7 +18,7 @@ namespace StarDefenceTutorial
             ScreenManager.AddScreen(new RecordsScreen());
             ScreenManager.ActivateScreenByName(ScreenNames.Game);
 
-            var game = new AXNAGame(720, 480);
+            var game = new AXNAGame(Configuration.GetInstance().ScreenWidth, Configuration.GetInstance().ScreenHeight);
             game.Run();
 
         }

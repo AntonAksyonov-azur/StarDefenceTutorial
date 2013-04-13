@@ -101,8 +101,6 @@ namespace StarDefenceTutorial.com.andaforce.game.screens
                 var bulletMoveRight = AXNA.Content.Load<Texture2D>("Textures/PlayerShip/Bullet/right");
                 var bulletService = new BulletService(this, bulletMoveLeft, bulletMoveRight);
                 AXNA.Game.Services.AddService(typeof (BulletService), bulletService);
-
-                bulletService.BulletShootInterval = 0.3f;
             }
         }
 

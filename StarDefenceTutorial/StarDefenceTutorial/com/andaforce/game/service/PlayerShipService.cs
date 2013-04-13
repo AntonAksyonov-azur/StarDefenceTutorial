@@ -12,6 +12,7 @@ namespace StarDefenceTutorial.com.andaforce.game.service
         private readonly Texture2D _death;
         private readonly Texture2D _idle;
         private readonly Texture2D _move;
+        private PlayerShip _currentPlayerShip;
 
         public PlayerShipService(Screen parentScreen, Texture2D idle, Texture2D move, Texture2D death) : base(parentScreen)
         {
@@ -22,7 +23,7 @@ namespace StarDefenceTutorial.com.andaforce.game.service
 
         public override void CreateEntity()
         {
-            var playerShip = new PlayerShip(100, 100, 72, 16);
+            _currentPlayerShip = new PlayerShip(100, 100, 72, 16);
 
             var playerIdle = new Image(_idle);
             var playerMove = new Image(_move);
@@ -32,12 +33,17 @@ namespace StarDefenceTutorial.com.andaforce.game.service
             playerDeath.X = -10;
             playerDeath.Y = -15;
 
-            playerShip.SetUpGraphics(playerIdle, playerMove, playerDeath);
-            playerShip.Velocity = 100;
-            playerShip.MaxHorizontalSpeed = 2.0f;
-            playerShip.HorizontalAcceleration = 0.15f;
+            _currentPlayerShip.SetUpGraphics(playerIdle, playerMove, playerDeath);
+            _currentPlayerShip.Velocity = 100;
+            _currentPlayerShip.MaxHorizontalSpeed = 2.0f;
+            _currentPlayerShip.HorizontalAcceleration = 0.15f;
 
-            ParentScreen.AddComponent(playerShip);
+            ParentScreen.AddComponent(_currentPlayerShip);
+        }
+
+        public void SetPlayerShipVelocity(int velocity)
+        {
+            _currentPlayerShip.Velocity = velocity;
         }
     }
 }

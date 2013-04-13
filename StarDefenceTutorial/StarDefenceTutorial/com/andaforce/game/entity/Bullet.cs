@@ -26,7 +26,7 @@ namespace StarDefenceTutorial.com.andaforce.game.entity
             base.UpdateMove(gameTime);
 
             // Удаляем пулю при выходе за границы экрана
-            if (!Hitbox.Intersects(AXNA.GraphicsDevice.Viewport.Bounds))
+            if (!GetEntityRectangle().Intersects(AXNA.GraphicsDevice.Viewport.Bounds))
             {
                 ParentScreen.RemoveComponent(this);
             }

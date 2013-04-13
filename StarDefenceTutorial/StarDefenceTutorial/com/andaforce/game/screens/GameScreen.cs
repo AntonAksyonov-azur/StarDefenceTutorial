@@ -27,11 +27,39 @@ namespace StarDefenceTutorial.com.andaforce.game.screens
 
             InitializePlayerShip();
 
+            InitializeBullets();
+
             InitializeEnemies();
 
             InitializeGamePlay();
 
+            InitializePowerups();
+
             return base.Initialize();
+        }
+
+        private void InitializeBullets()
+        {
+            var existedBulletService = AXNA.Game.Services.GetService(typeof (BulletService)) as BulletService;
+            if (existedBulletService == null)
+            {
+                var bulletMoveLeft = AXNA.Content.Load<Texture2D>("Textures/PlayerShip/Bullet/left");
+                var bulletMoveRight = AXNA.Content.Load<Texture2D>("Textures/PlayerShip/Bullet/right");
+                var bulletService = new BulletService(this, bulletMoveLeft, bulletMoveRight);
+                AXNA.Game.Services.AddService(typeof (BulletService), bulletService);
+            }
+        }
+
+        private void InitializePowerups()
+        {
+            var powerupTexture = AXNA.Content.Load<Texture2D>("Textures/Powerup/powerup");
+            var powerupService = new PowerupService(this, powerupTexture);
+
+            var existedPowerupService = AXNA.Game.Services.GetService(typeof (PowerupService)) as PowerupService;
+            if (existedPowerupService == null)
+            {
+                AXNA.Game.Services.AddService(typeof (PowerupService), powerupService);
+            }
         }
 
         private void InitializeGamePlay()
@@ -39,7 +67,7 @@ namespace StarDefenceTutorial.com.andaforce.game.screens
             var gameplayService = new GameplayService();
             gameplayService.Reset();
             gameplayService.RemoveAllObservers();
-            AXNA.Game.Services.RemoveService(typeof(GameplayService));
+            AXNA.Game.Services.RemoveService(typeof (GameplayService));
 
             var spriteFont = AXNA.Content.Load<SpriteFont>("Fonts/Pericles");
 
@@ -69,8 +97,8 @@ namespace StarDefenceTutorial.com.andaforce.game.screens
             AddComponent(labelTime);
 
             var centerMessage = new TextString("", spriteFont);
-            var labelCenterMessage = new TextLabel(centerMessage, AXNA.GraphicsDevice.Viewport.Width/2 - 100,
-                                                   AXNA.GraphicsDevice.Viewport.Height/2 - 20);
+            var labelCenterMessage = new TextLabel(centerMessage, AXNA.GraphicsDevice.Viewport.Width / 2 - 100,
+                                                   AXNA.GraphicsDevice.Viewport.Height / 2 - 20);
             gameplayService.AddObserver(ObserverNames.CenterMessage, labelCenterMessage);
             AddComponent(labelCenterMessage);
 
@@ -92,16 +120,6 @@ namespace StarDefenceTutorial.com.andaforce.game.screens
                 existedPlayerShipService = playerShipService;
             }
             existedPlayerShipService.CreateEntity();
-
-            var existedBulletService =
-                AXNA.Game.Services.GetService(typeof (BulletService)) as BulletService;
-            if (existedBulletService == null)
-            {
-                var bulletMoveLeft = AXNA.Content.Load<Texture2D>("Textures/PlayerShip/Bullet/left");
-                var bulletMoveRight = AXNA.Content.Load<Texture2D>("Textures/PlayerShip/Bullet/right");
-                var bulletService = new BulletService(this, bulletMoveLeft, bulletMoveRight);
-                AXNA.Game.Services.AddService(typeof (BulletService), bulletService);
-            }
         }
 
         private void InitializeEnemies()
@@ -165,6 +183,13 @@ namespace StarDefenceTutorial.com.andaforce.game.screens
                 {
                     enemyService.UpdateService(gameTime);
                     enemyService.MoveEnemies(-gameplayService.GetScrollSpeedBasedOnLevel());
+                }
+
+                var powerupService = AXNA.Game.Services.GetService(typeof (PowerupService)) as PowerupService;
+                if (powerupService != null)
+                {
+                    powerupService.UpdateService(gameTime);
+                    powerupService.MovePowerups(-gameplayService.GetScrollSpeedBasedOnLevel());
                 }
             }
         }

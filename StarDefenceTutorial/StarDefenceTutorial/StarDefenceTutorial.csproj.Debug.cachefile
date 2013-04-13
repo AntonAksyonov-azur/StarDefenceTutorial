@@ -3,7 +3,6 @@ Content\Textures\explosions.xnb
 Content\Textures\GameScreen.xnb
 Content\Textures\ParallaxStars.xnb
 Content\Textures\PlayerShip.xnb
-Content\Textures\PowerUp.xnb
 Content\Textures\PrimaryBackground.xnb
 Content\Textures\TitleScreen.xnb
 Content\Textures\explosion.xnb
@@ -19,3 +18,4 @@ Content\Sounds\scifi002.xnb
 Content\Sounds\scifi041.xnb
 Content\Sounds\scifi050.xnb
 Content\Fonts\Pericles.xnb
+Content\Textures\Powerup\Powerup.xnb

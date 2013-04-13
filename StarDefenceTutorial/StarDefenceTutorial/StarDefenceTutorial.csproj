@@ -134,6 +134,8 @@
     <Compile Include="com\andaforce\game\entity\powerup\effects\IncreaseWeaponPowerupEffect.cs" />
     <Compile Include="com\andaforce\game\entity\powerup\effects\IncreateFireratePowerupEffect.cs" />
     <Compile Include="com\andaforce\game\entity\powerup\Powerup.cs" />
+    <Compile Include="com\andaforce\game\entity\powerup\PowerupColors.cs" />
+    <Compile Include="com\andaforce\game\entity\powerup\PowerupEffects.cs" />
     <Compile Include="com\andaforce\game\entity\powerup\PowerupType.cs" />
     <Compile Include="com\andaforce\game\entity\StarDefenceTutorialEntity.cs" />
     <Compile Include="com\andaforce\game\entity\Bullet.cs" />
@@ -152,6 +154,7 @@
     <Compile Include="com\andaforce\game\service\observer\ITextObserver.cs" />
     <Compile Include="com\andaforce\game\service\observer\ObserverNames.cs" />
     <Compile Include="com\andaforce\game\service\PlayerShipService.cs" />
+    <Compile Include="com\andaforce\game\service\PowerupService.cs" />
     <Compile Include="com\c3\Primitives2D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />

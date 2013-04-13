@@ -19,7 +19,7 @@ namespace StarDefenceTutorial.com.andaforce.game.entity.powerup.effects
         {
             var bulleService = AXNA.Game.Services.GetService(typeof (BulletService)) as BulletService;
             if (bulleService != null)
-                bulleService.SetFirerate(Configuration.GetInstance().EffectTimeIncreaseFirerate / 2.0f);
+                bulleService.SetFirerate(Configuration.GetInstance().PlayerShipFirerate / 2.0f);
         }
 
         public override void OnRefreshEffect()
@@ -31,7 +31,7 @@ namespace StarDefenceTutorial.com.andaforce.game.entity.powerup.effects
         {
             var bulleService = AXNA.Game.Services.GetService(typeof(BulletService)) as BulletService;
             if (bulleService != null)
-                bulleService.SetFirerate(Configuration.GetInstance().EffectTimeIncreaseFirerate);
+                bulleService.SetFirerate(Configuration.GetInstance().PlayerShipFirerate);
         }
     }
 }

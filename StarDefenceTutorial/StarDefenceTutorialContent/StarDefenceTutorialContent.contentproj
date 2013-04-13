@@ -67,8 +67,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\PowerUp.png">
-      <Name>PowerUp</Name>
+    <Compile Include="Textures\Powerup\Powerup.png">
+      <Name>Powerup</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

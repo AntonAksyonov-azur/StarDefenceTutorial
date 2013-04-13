@@ -63,8 +63,8 @@ namespace StarDefenceTutorial.com.andaforce.game.entity
 
         protected virtual void UpdateMove(GameTime gameTime)
         {
-            Position.X += AXNA.GetTimeIntervalValue(gameTime)*MoveVector.X;
-            Position.Y += AXNA.GetTimeIntervalValue(gameTime)*MoveVector.Y;
+            Position.X += AXNA.GetTimeIntervalValue(gameTime) * MoveVector.X;
+            Position.Y += AXNA.GetTimeIntervalValue(gameTime) * MoveVector.Y;
         }
 
         protected virtual void UpdateCollision()
@@ -79,7 +79,7 @@ namespace StarDefenceTutorial.com.andaforce.game.entity
             {
                 ParentScreen.RemoveComponent(this);
             }
-            // Если это не анимация, удаляем объект немедленно
+                // Если это не анимация, удаляем объект немедленно
             else if (spritemap == null)
             {
                 ParentScreen.RemoveComponent(this);

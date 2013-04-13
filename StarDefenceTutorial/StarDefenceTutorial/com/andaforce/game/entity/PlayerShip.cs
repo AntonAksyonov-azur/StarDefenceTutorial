@@ -1,8 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using StarDefenceTutorial.com.andaforce.axna;
 using StarDefenceTutorial.com.andaforce.axna.entity;
 using StarDefenceTutorial.com.andaforce.game.constants;
+using StarDefenceTutorial.com.andaforce.game.entity.powerup;
 using StarDefenceTutorial.com.andaforce.game.service;
 using StarDefenceTutorial.com.andaforce.game.service.gameplay;
 
@@ -15,6 +18,8 @@ namespace StarDefenceTutorial.com.andaforce.game.entity
 
         public float Velocity;
 
+        private readonly List<Powerup>_powerupList = new List<Powerup>();
+
         public PlayerShip(float x, float y, int width, int height)
             : base(x, y, width, height)
         {
@@ -23,6 +28,8 @@ namespace StarDefenceTutorial.com.andaforce.game.entity
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            UpdatePowerups(gameTime);
 
             switch (CurrentState)
             {
@@ -39,6 +46,23 @@ namespace StarDefenceTutorial.com.andaforce.game.entity
                     break;
                 case EntityState.None:
                     break;
+            }
+        }
+
+        public void AddPowerup(Powerup powerup)
+        {
+            powerup.Effect.OnAddEffect();
+            _powerupList.Add(powerup);
+        }
+
+        private void UpdatePowerups(GameTime gameTime)
+        {
+            List<Powerup> removeList = _powerupList.Where(powerup => powerup.Effect.Update(gameTime)).ToList();
+
+            foreach (var powerup in removeList)
+            {
+                powerup.Effect.OnRemoveEffect();
+                _powerupList.Remove(powerup);
             }
         }
 
@@ -127,12 +151,6 @@ namespace StarDefenceTutorial.com.andaforce.game.entity
                 var bulletService = AXNA.Game.Services.GetService(typeof (BulletService)) as BulletService;
                 if (bulletService != null) bulletService.TryShoot(this);
             }
-        }
-
-        public void AppyPowerup()
-        {
-            
-
         }
     }
 }

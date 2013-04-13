@@ -122,7 +122,7 @@ namespace StarDefenceTutorial.com.andaforce.game.entity
             }
         }
 
-        private void UpdateShootKeys(GameTime gameTime)
+        private void UpdateShootKeys()
         {
             if (InputManager.IsKeyDown(Keys.Space))
             {

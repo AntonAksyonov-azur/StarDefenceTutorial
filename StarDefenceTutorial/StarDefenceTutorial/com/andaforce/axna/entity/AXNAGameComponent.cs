@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using StarDefenceTutorial.com.andaforce.axna.screen.manager;
 
 namespace StarDefenceTutorial.com.andaforce.axna.entity
 {
+// ReSharper disable InconsistentNaming
     public abstract class AXNAGameComponent : DrawableGameComponent
+// ReSharper restore InconsistentNaming
     {
         public Screen ParentScreen;
 
-        public AXNAGameComponent()
+        protected AXNAGameComponent()
             : base(AXNA.Game)
         {
-            
         }
-
     }
 }

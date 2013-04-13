@@ -1,27 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using StarDefenceTutorial.com.andaforce.axna;
 using StarDefenceTutorial.com.andaforce.axna.graphics;
 using StarDefenceTutorial.com.andaforce.axna.screen.manager;
-using Microsoft.Xna.Framework;
-using StarDefenceTutorial.com.andaforce.game.entity;
-using Microsoft.Xna.Framework.Graphics;
 using StarDefenceTutorial.com.andaforce.game.constants;
-using StarDefenceTutorial.com.andaforce.axna;
+using StarDefenceTutorial.com.andaforce.game.entity;
 using StarDefenceTutorial.com.andaforce.game.service.gameplay;
 
 namespace StarDefenceTutorial.com.andaforce.game.service
 {
     public class BulletService : AbstractSpawnService
     {
+        public float BulletShootInterval;
         public Texture2D LeftBulletGraphics;
         public Texture2D RightBulletGraphics;
+        private float _bulletElapsedShootTime = 999; // Для того, чтобы первое нажатие сразу выпустило пулю
+        private bool _playerShipLeftOrientation;
+        private Vector2 _playerShipPosition;
 
-        public float BulletShootInterval;
-
-        public BulletService(Screen parentScreen, 
-            Texture2D leftBulletGraphics, Texture2D rightBulletGraphics)
+        public BulletService(Screen parentScreen,
+                             Texture2D leftBulletGraphics, Texture2D rightBulletGraphics)
         {
             LeftBulletGraphics = leftBulletGraphics;
             RightBulletGraphics = rightBulletGraphics;
@@ -30,8 +28,8 @@ namespace StarDefenceTutorial.com.andaforce.game.service
 
         public override void CreateEntity()
         {
-            Image img = new Image(_playerShipLeftOrientation ? LeftBulletGraphics : RightBulletGraphics);
-            Bullet bullet = new Bullet(
+            var img = new Image(_playerShipLeftOrientation ? LeftBulletGraphics : RightBulletGraphics);
+            var bullet = new Bullet(
                 _playerShipPosition.X, _playerShipPosition.Y,
                 16, 1,
                 _playerShipLeftOrientation ? -300 : 300);
@@ -50,13 +48,14 @@ namespace StarDefenceTutorial.com.andaforce.game.service
         {
             if (_bulletElapsedShootTime >= BulletShootInterval)
             {
-                _playerShipPosition = new Vector2(playerShip.GetEntityRectangle().Center.X, playerShip.GetEntityRectangle().Center.Y);
+                _playerShipPosition = new Vector2(playerShip.GetEntityRectangle().Center.X,
+                                                  playerShip.GetEntityRectangle().Center.Y);
                 _playerShipLeftOrientation = playerShip.LeftOrientation;
 
                 CreateEntity();
 
-                GameplayService gameplayService =
-                    AXNA.Game.Services.GetService(typeof(GameplayService)) as GameplayService;
+                var gameplayService =
+                    AXNA.Game.Services.GetService(typeof (GameplayService)) as GameplayService;
                 if (gameplayService != null) gameplayService.AddShot();
 
                 _bulletElapsedShootTime = 0;
@@ -64,8 +63,5 @@ namespace StarDefenceTutorial.com.andaforce.game.service
         }
 
         //
-        private float _bulletElapsedShootTime = 999; // Для того, чтобы первое нажатие сразу выпустило пулю
-        private Vector2 _playerShipPosition;
-        private bool _playerShipLeftOrientation;
     }
 }

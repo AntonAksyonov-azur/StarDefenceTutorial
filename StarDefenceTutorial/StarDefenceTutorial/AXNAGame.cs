@@ -10,11 +10,12 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using StarDefenceTutorial.com.andaforce.axna;
 using StarDefenceTutorial.com.andaforce.axna.screen.manager;
-using StarDefenceTutorial.com.andaforce.game.screens;
 
 namespace StarDefenceTutorial
 {
-    public class AXNAGame : Microsoft.Xna.Framework.Game
+// ReSharper disable InconsistentNaming
+    public class AXNAGame : Game
+// ReSharper restore InconsistentNaming
     {
         protected readonly GraphicsDeviceManager Graphics;
 
@@ -30,10 +31,12 @@ namespace StarDefenceTutorial
             IsMouseVisible = isMouseVisible;
         }
 
+// ReSharper disable RedundantOverridenMember
         protected override void Initialize()
         {
             base.Initialize();
         }
+// ReSharper restore RedundantOverridenMember
 
         protected override void LoadContent()
         {

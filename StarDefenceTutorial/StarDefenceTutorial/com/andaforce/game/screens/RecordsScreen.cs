@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -11,7 +8,6 @@ using StarDefenceTutorial.com.andaforce.axna.screen.manager;
 using StarDefenceTutorial.com.andaforce.axna.ui;
 using StarDefenceTutorial.com.andaforce.game.constants;
 using StarDefenceTutorial.com.andaforce.game.service.gameplay;
-using StarDefenceTutorial.com.andaforce.game.service.observer;
 
 namespace StarDefenceTutorial.com.andaforce.game.screens
 {
@@ -29,7 +25,7 @@ namespace StarDefenceTutorial.com.andaforce.game.screens
             var labelCaption = new TextLabel(caption, 10, 10);
             AddComponent(labelCaption);
 
-            GameplayService gameplayService = AXNA.Game.Services.GetService(typeof (GameplayService)) as GameplayService;
+            var gameplayService = AXNA.Game.Services.GetService(typeof (GameplayService)) as GameplayService;
             if (gameplayService != null)
             {
                 String time = String.Format("You survived for {0:f2} seconds total", gameplayService.ElapsedGameTime);

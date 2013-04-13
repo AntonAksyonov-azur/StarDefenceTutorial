@@ -105,7 +105,7 @@ namespace StarDefenceTutorial.com.andaforce.axna.graphics
 
         private Rectangle GetCurrentFrameRectangle()
         {
-            Rectangle rectangle = new Rectangle(
+            var rectangle = new Rectangle(
                     PlayedAnim.FirstFramePosition.X + (_frameWidth * CurrentFrame),
                     PlayedAnim.FirstFramePosition.Y,
                     _frameWidth, _frameHeight);

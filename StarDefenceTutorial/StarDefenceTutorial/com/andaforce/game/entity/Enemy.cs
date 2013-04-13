@@ -13,7 +13,7 @@ namespace StarDefenceTutorial.com.andaforce.game.entity
         public Enemy(float x, float y, int width, int height, Vector2 moveVector)
             : base(x, y, width, height)
         {
-            this.MoveVector = moveVector;
+            MoveVector = moveVector;
         }
 
         public override void Update(GameTime gameTime)
@@ -26,7 +26,8 @@ namespace StarDefenceTutorial.com.andaforce.game.entity
                     UpdateMove(gameTime);
                     UpdateCollision();
 
-                    (Graphic as Image).SetRotationAngleByRadians(_rotationAngle += 0.01f);
+                    var image = Graphic as Image;
+                    if (image != null) image.SetRotationAngleByRadians(_rotationAngle += 0.01f);
                     break;
                 case EntityState.Death:
                     UpdateDeath();
@@ -36,13 +37,13 @@ namespace StarDefenceTutorial.com.andaforce.game.entity
 
         protected override void UpdateDeath()
         {
-            Spritemap spritemap = Graphic as Spritemap;
+            var spritemap = Graphic as Spritemap;
             if (spritemap != null && spritemap.IsAnimationFinished())
             {
                 ParentScreen.RemoveComponent(this);
 
                 var enemyService = AXNA.Game.Services.GetService(typeof (EnemyService)) as EnemyService;
-                enemyService.RemoveEnemy(this);
+                if (enemyService != null) enemyService.RemoveEnemy(this);
             }
         }
 

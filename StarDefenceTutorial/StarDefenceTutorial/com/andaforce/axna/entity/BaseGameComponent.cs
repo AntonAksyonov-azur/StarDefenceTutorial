@@ -1,7 +1,5 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using StarDefenceTutorial.com.andaforce.axna.graphics;
-using StarDefenceTutorial.com.andaforce.axna.screen.manager;
 using StarDefenceTutorial.com.c3;
 
 namespace StarDefenceTutorial.com.andaforce.axna.entity
@@ -69,7 +67,7 @@ namespace StarDefenceTutorial.com.andaforce.axna.entity
 
         public Rectangle GetEntityRectangle()
         {
-            Rectangle entityRectangle =
+            var entityRectangle =
                  new Rectangle(
                      (int)Position.X + Hitbox.X, (int)Position.Y + Hitbox.Y, Hitbox.Width, Hitbox.Height);
 

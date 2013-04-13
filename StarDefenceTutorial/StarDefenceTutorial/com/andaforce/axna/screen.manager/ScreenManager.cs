@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 
 namespace StarDefenceTutorial.com.andaforce.axna.screen.manager
@@ -10,7 +11,7 @@ namespace StarDefenceTutorial.com.andaforce.axna.screen.manager
         private static Screen _nextScreen;
         private static Screen _prevScreen;
 
-        private static Screen _activeScreen = null;
+        private static Screen _activeScreen;
 
         internal static Screen GetActiveScreen()
         {
@@ -19,12 +20,9 @@ namespace StarDefenceTutorial.com.andaforce.axna.screen.manager
 
         internal static void AddScreen(Screen screen)
         {
-            foreach (Screen scr in Screens)
+            if (Screens.Any(scr => scr.Name == screen.Name))
             {
-                if (scr.Name == screen.Name)
-                {
-                    throw new Exception("Screen with this name already registered!");
-                }
+                throw new Exception("Screen with this name already registered!");
             }
 
             Screens.Add(screen);

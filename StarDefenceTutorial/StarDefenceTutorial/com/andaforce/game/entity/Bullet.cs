@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using StarDefenceTutorial.com.andaforce.axna;
 using StarDefenceTutorial.com.andaforce.game.constants;
-using StarDefenceTutorial.com.andaforce.game.service;
 using StarDefenceTutorial.com.andaforce.game.service.gameplay;
 
 namespace StarDefenceTutorial.com.andaforce.game.entity

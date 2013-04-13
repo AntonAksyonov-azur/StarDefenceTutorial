@@ -12,7 +12,6 @@ namespace StarDefenceTutorial.com.andaforce.game.entity.powerup
         {
             Colors.Add(PowerupType.AdditionalLives, Color.Red);
             Colors.Add(PowerupType.AdditionalScores, Color.Green);
-            Colors.Add(PowerupType.IncreasedFirerate, Color.Yellow);
             Colors.Add(PowerupType.IncreasedFirerate, Color.Violet);
             Colors.Add(PowerupType.IncreasedVelocity, Color.Blue);
             Colors.Add(PowerupType.IncreatedWeapon, Color.Orange);

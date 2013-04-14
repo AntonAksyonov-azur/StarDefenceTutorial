@@ -8,26 +8,26 @@ namespace StarDefenceTutorial.com.andaforce.game.entity.powerup.effects
     {
         public IncreaseVelocityPowerupEffect()
         {
-            EffectTime = Configuration.GetInstance().EffectTimeIncreaseVelocity;
+            EffectTime = Configuration.Get().PowerupConfiguration.EffectTimeIncreaseVelocity;
         }
 
         public override void OnAddEffect()
         {
             var playerShipservice = AXNA.Game.Services.GetService(typeof (PlayerShipService)) as PlayerShipService;
             if (playerShipservice != null)
-                playerShipservice.SetPlayerShipVelocity(Configuration.GetInstance().PlayerShipVelocity * 2);
+                playerShipservice.SetPlayerShipVelocity(Configuration.Get().PlayerShipConfiguration.PlayerShipVelocity * 2);
         }
 
         public override void OnRemoveEffect()
         {
             var playerShipservice = AXNA.Game.Services.GetService(typeof (PlayerShipService)) as PlayerShipService;
             if (playerShipservice != null)
-                playerShipservice.SetPlayerShipVelocity(Configuration.GetInstance().PlayerShipVelocity);
+                playerShipservice.SetPlayerShipVelocity(Configuration.Get().PlayerShipConfiguration.PlayerShipVelocity);
         }
 
         public override void OnRefreshEffect()
         {
-            EffectTime = Configuration.GetInstance().EffectTimeIncreaseVelocity;
+            EffectTime = Configuration.Get().PowerupConfiguration.EffectTimeIncreaseVelocity;
         }
     }
 }

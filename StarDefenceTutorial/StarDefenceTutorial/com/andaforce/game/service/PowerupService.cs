@@ -12,14 +12,15 @@ namespace StarDefenceTutorial.com.andaforce.game.service
 {
     public class PowerupService : AbstractSpawnService
     {
-        private const float PowerupsAppearsInterval = 10.0f;
+        private readonly int _powerupsAppearsInterval;
         private readonly List<Powerup> _powerups = new List<Powerup>();
         public Texture2D PowerupTexture;
-        private float _powerupElapsedTime;
+        private int _powerupElapsedTime;
 
         public PowerupService(Screen parentScreen, Texture2D powerupTexture) : base(parentScreen)
         {
             PowerupTexture = powerupTexture;
+            _powerupsAppearsInterval = Configuration.Get().PowerupConfiguration.PowerupAppearsInterval;
         }
 
         public override void CreateEntity()
@@ -27,8 +28,9 @@ namespace StarDefenceTutorial.com.andaforce.game.service
             var type = (PowerupType) AXNA.Rnd.Next(0, 5);
   
             var powerup = new Powerup(type,
-                                      Configuration.GetInstance().ScreenWidth,
-                                      AXNA.Rnd.Next(0, Configuration.GetInstance().ScreenHeight), 32, 32);
+                                      Configuration.Get().ScreenConfiguration.ScreenWidth,
+                                      AXNA.Rnd.Next(0, Configuration.Get().ScreenConfiguration.ScreenHeight), 
+                                      32, 32);
             var idle = new Spritemap(PowerupTexture, 32, 32);
             idle.AddAnimation(EntityState.Idle, new Point(0, 0), 23, 16.0f, true);
             idle.SetOverlayColor(PowerupColors.GetInstance().Colors[type]);
@@ -41,14 +43,14 @@ namespace StarDefenceTutorial.com.andaforce.game.service
 
         public override void UpdateService(GameTime gameTime)
         {
-            if (_powerupElapsedTime > PowerupsAppearsInterval)
+            if (_powerupElapsedTime > _powerupsAppearsInterval)
             {
                 CreateEntity();
                 _powerupElapsedTime = 0;
             }
             else
             {
-                _powerupElapsedTime += AXNA.GetTimeIntervalValue(gameTime);
+                _powerupElapsedTime += gameTime.ElapsedGameTime.Milliseconds;
             }
         }
 

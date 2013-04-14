@@ -12,26 +12,26 @@ namespace StarDefenceTutorial.com.andaforce.game.entity.powerup.effects
     {
         public IncreateFireratePowerupEffect()
         {
-            EffectTime = Configuration.GetInstance().EffectTimeIncreaseFirerate;
+            EffectTime = Configuration.Get().PowerupConfiguration.EffectTimeIncreaseFirerate;
         }
 
         public override void OnAddEffect()
         {
             var bulleService = AXNA.Game.Services.GetService(typeof (BulletService)) as BulletService;
             if (bulleService != null)
-                bulleService.SetFirerate(Configuration.GetInstance().PlayerShipFirerate / 2.0f);
+                bulleService.SetFirerate(Configuration.Get().BulletConfiguration.ShootInterval / 2);
         }
 
         public override void OnRefreshEffect()
         {
-            EffectTime = Configuration.GetInstance().EffectTimeIncreaseFirerate;
+            EffectTime = Configuration.Get().PowerupConfiguration.EffectTimeIncreaseFirerate;
         }
 
         public override void OnRemoveEffect()
         {
             var bulleService = AXNA.Game.Services.GetService(typeof(BulletService)) as BulletService;
             if (bulleService != null)
-                bulleService.SetFirerate(Configuration.GetInstance().PlayerShipFirerate);
+                bulleService.SetFirerate(Configuration.Get().BulletConfiguration.ShootInterval);
         }
     }
 }

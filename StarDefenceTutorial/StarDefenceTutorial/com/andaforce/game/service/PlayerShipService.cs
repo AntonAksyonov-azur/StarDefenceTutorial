@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using StarDefenceTutorial.com.andaforce.axna.graphics;
 using StarDefenceTutorial.com.andaforce.axna.screen.manager;
+using StarDefenceTutorial.com.andaforce.game.config;
 using StarDefenceTutorial.com.andaforce.game.constants;
 using StarDefenceTutorial.com.andaforce.game.entity;
 
@@ -34,9 +35,7 @@ namespace StarDefenceTutorial.com.andaforce.game.service
             playerDeath.Y = -15;
 
             _currentPlayerShip.SetUpGraphics(playerIdle, playerMove, playerDeath);
-            _currentPlayerShip.Velocity = 100;
-            _currentPlayerShip.MaxHorizontalSpeed = 2.0f;
-            _currentPlayerShip.HorizontalAcceleration = 0.15f;
+            _currentPlayerShip.Velocity = Configuration.Get().PlayerShipConfiguration.PlayerShipVelocity;
 
             ParentScreen.AddComponent(_currentPlayerShip);
         }

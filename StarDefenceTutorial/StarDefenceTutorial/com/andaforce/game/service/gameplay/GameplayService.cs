@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using StarDefenceTutorial.com.andaforce.axna;
 using StarDefenceTutorial.com.andaforce.axna.screen.manager;
+using StarDefenceTutorial.com.andaforce.game.config;
 using StarDefenceTutorial.com.andaforce.game.constants;
 using StarDefenceTutorial.com.andaforce.game.service.observer;
 
@@ -14,19 +15,25 @@ namespace StarDefenceTutorial.com.andaforce.game.service.gameplay
         private readonly Dictionary<ObserverNames, ITextObserver> _observers =
             new Dictionary<ObserverNames, ITextObserver>();
 
-        public int HitsToNextLevel = 10;
+        private readonly int _hitsToNextLevel;
 
         private GameplayState _currentGameplayState;
-        private int _hitsRemainingForNextLevel = 10;
+        private int _hitsRemainingForNextLevel;
 
         public double ElapsedGameTime { get; private set; }
         public int PlayerLives { get; private set; }
-        public int Score { get; private set; }
+        public float Score { get; private set; }
 
         public int TotalHits { get; private set; }
 
         public int TotalShots { get; private set; }
         public int Level { get; private set; }
+
+        public GameplayService()
+        {
+            _hitsToNextLevel = Configuration.Get().GameplayConfiguration.HitsToChangeLevel;
+            _hitsRemainingForNextLevel = _hitsToNextLevel;
+        }
 
         #region Управляющие функции
 
@@ -121,7 +128,7 @@ namespace StarDefenceTutorial.com.andaforce.game.service.gameplay
             if (_hitsRemainingForNextLevel == 0)
             {
                 ChangeLevel(Level + 1);
-                _hitsRemainingForNextLevel = HitsToNextLevel;
+                _hitsRemainingForNextLevel = _hitsToNextLevel;
             }
         }
 
@@ -131,7 +138,7 @@ namespace StarDefenceTutorial.com.andaforce.game.service.gameplay
             _observers[ObserverNames.Accuracy].UpdateTextParameter(GetShootingStatisticString());
         }
 
-        public void ChangeScore(int scoreChange)
+        public void ChangeScore(float scoreChange)
         {
             Score += scoreChange;
             _observers[ObserverNames.Score].UpdateTextParameter(GetScoreString());
@@ -144,7 +151,7 @@ namespace StarDefenceTutorial.com.andaforce.game.service.gameplay
 
         public void ReduceScoreForDeath()
         {
-            ChangeScore(GetPlayerdeathScoreBasedOnLevel());
+            ChangeScore(GetPlayerDeathScoreBasedOnLevel());
         }
 
         public void ChangePlayerLives(int playerLivesChange)
@@ -179,7 +186,7 @@ namespace StarDefenceTutorial.com.andaforce.game.service.gameplay
             if (TotalShots > 0)
             {
                 return String.Format("Shots: {0}, Hits: {1}, Accuracy: {2:f2}%", TotalShots, TotalHits,
-                                     (float) TotalHits/TotalShots*100);
+                                     (float) TotalHits / TotalShots * 100);
             }
 
             return "Shots: 0, Hits: 0, Accuracy: 100%";
@@ -189,7 +196,7 @@ namespace StarDefenceTutorial.com.andaforce.game.service.gameplay
         {
             if (TotalShots > 0)
             {
-                return String.Format("{0:f2}%", (float) TotalHits/TotalShots*100);
+                return String.Format("{0:f2}%", (float) TotalHits / TotalShots * 100);
             }
 
             return "100%";
@@ -202,7 +209,7 @@ namespace StarDefenceTutorial.com.andaforce.game.service.gameplay
 
         public String GetScoreString()
         {
-            return String.Format("Score: {0}", Score);
+            return String.Format("Score: {0:f0}", Score);
         }
 
         public String GetPlayerLivesString()
@@ -217,8 +224,8 @@ namespace StarDefenceTutorial.com.andaforce.game.service.gameplay
 
         public String GetTotalScoreString()
         {
-            float accuracy = TotalShots == 0 ? 1 : (float) TotalHits/TotalShots;
-            return String.Format("{0:f2}", Score + Score*accuracy);
+            float accuracy = TotalShots == 0 ? 1 : (float) TotalHits / TotalShots;
+            return String.Format("{0:f2}", Score + Score * accuracy);
         }
 
         #endregion
@@ -227,27 +234,32 @@ namespace StarDefenceTutorial.com.andaforce.game.service.gameplay
 
         public float GetScrollSpeedBasedOnLevel()
         {
-            return Level;
+            return Configuration.Get().GameplayConfiguration.ScrollSpeed * Level *
+                   Configuration.Get().GameplayConfiguration.ScrollModifierByLevel;
         }
 
         public int GetEnemiesCountBasedOnLevel()
         {
-            return Level*5;
+            return Configuration.Get().GameplayConfiguration.BaseEnemiesCount +
+                   Level * Configuration.Get().GameplayConfiguration.AdditionalEnemiesByLevel;
         }
 
         public int GetEnemiesSpeedBasedOnLevel()
         {
-            return 140 + Level*10;
+            return Configuration.Get().GameplayConfiguration.BaseMaxEnemiesSpeed +
+                   Level * Configuration.Get().GameplayConfiguration.EnemiesSpeedInscreasingByLevel;
         }
 
-        public int GetScoresForEnemiesBasedOnLevel()
+        public float GetScoresForEnemiesBasedOnLevel()
         {
-            return Level;
+            return Configuration.Get().GameplayConfiguration.ScoresByHit *
+                   Configuration.Get().GameplayConfiguration.ScoreModifierByLevel * Level;
         }
 
-        public int GetPlayerdeathScoreBasedOnLevel()
+        public float GetPlayerDeathScoreBasedOnLevel()
         {
-            return -Level*10;
+            return Configuration.Get().GameplayConfiguration.ScoresByDeath *
+                   Configuration.Get().GameplayConfiguration.ScoreModifierByLevel * Level;
         }
 
         #endregion

@@ -13,7 +13,6 @@ namespace StarDefenceTutorial.com.andaforce.game.entity
 {
     public class PlayerShip : StarDefenceTutorialEntity
     {
-        public float HorizontalAcceleration;
         public float MaxHorizontalSpeed;
 
         public float Velocity;

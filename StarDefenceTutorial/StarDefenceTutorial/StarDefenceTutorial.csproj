@@ -93,6 +93,7 @@
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
@@ -124,7 +125,13 @@
     <Compile Include="com\andaforce\axna\screen.manager\ScreenManager.cs" />
     <Compile Include="com\andaforce\axna\ui\ClickableLabel.cs" />
     <Compile Include="com\andaforce\axna\ui\TextLabel.cs" />
+    <Compile Include="com\andaforce\game\config\BulletConfiguration.cs" />
     <Compile Include="com\andaforce\game\config\Configuration.cs" />
+    <Compile Include="com\andaforce\game\config\EnemyConfiguration.cs" />
+    <Compile Include="com\andaforce\game\config\GameplayConfiguration.cs" />
+    <Compile Include="com\andaforce\game\config\PlayerShipConfiguration.cs" />
+    <Compile Include="com\andaforce\game\config\PowerupConfiguration.cs" />
+    <Compile Include="com\andaforce\game\config\ScreenConfiguration.cs" />
     <Compile Include="com\andaforce\game\constants\EntityStates.cs" />
     <Compile Include="com\andaforce\game\constants\ScreenNames.cs" />
     <Compile Include="com\andaforce\game\entity\powerup\effects\AbstractPowerupEffect.cs" />

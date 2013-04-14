@@ -8,7 +8,7 @@ namespace StarDefenceTutorial.com.andaforce.game.entity.powerup.effects
     {
         public IncreaseWeaponPowerupEffect()
         {
-            EffectTime = Configuration.GetInstance().EffectTimeIncreaseWeapon;
+            EffectTime = Configuration.Get().PowerupConfiguration.EffectTimeIncreaseWeapon;
         }
 
         public override void OnAddEffect()
@@ -20,7 +20,7 @@ namespace StarDefenceTutorial.com.andaforce.game.entity.powerup.effects
 
         public override void OnRefreshEffect()
         {
-            EffectTime = Configuration.GetInstance().EffectTimeIncreaseWeapon;
+            EffectTime = Configuration.Get().PowerupConfiguration.EffectTimeIncreaseWeapon;
         }
 
         public override void OnRemoveEffect()

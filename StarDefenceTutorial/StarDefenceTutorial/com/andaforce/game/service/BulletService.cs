@@ -12,10 +12,10 @@ namespace StarDefenceTutorial.com.andaforce.game.service
 {
     public class BulletService : AbstractSpawnService
     {
-        public float BulletShootInterval;
         public Texture2D LeftBulletGraphics;
         public Texture2D RightBulletGraphics;
-        private float _bulletElapsedShootTime = 999; // Для того, чтобы первое нажатие сразу выпустило пулю
+        private int _bulletElapsedShootTime = int.MaxValue; // Для того, чтобы первое нажатие сразу выпустило пулю
+        private int _bulletShootInterval;
         private bool _isTripleMode;
         private bool _playerShipLeftOrientation;
         private Vector2 _playerShipPosition;
@@ -26,15 +26,15 @@ namespace StarDefenceTutorial.com.andaforce.game.service
             LeftBulletGraphics = leftBulletGraphics;
             RightBulletGraphics = rightBulletGraphics;
 
-            BulletShootInterval = Configuration.GetInstance().PlayerShipFirerate;
+            _bulletShootInterval = Configuration.Get().BulletConfiguration.ShootInterval;
         }
 
         public override void CreateEntity()
         {
             var img = new Image(_playerShipLeftOrientation ? LeftBulletGraphics : RightBulletGraphics);
             int speed = _playerShipLeftOrientation
-                            ? -Configuration.GetInstance().BulletVelocity
-                            : Configuration.GetInstance().BulletVelocity;
+                            ? -Configuration.Get().BulletConfiguration.BulletVelocity
+                            : Configuration.Get().BulletConfiguration.BulletVelocity;
 
             ParentScreen.AddComponent(CreateBullet(_playerShipPosition.Y, speed, img));
 
@@ -54,12 +54,12 @@ namespace StarDefenceTutorial.com.andaforce.game.service
 
         public override void UpdateService(GameTime gameTime)
         {
-            _bulletElapsedShootTime += AXNA.GetTimeIntervalValue(gameTime);
+            _bulletElapsedShootTime += _bulletElapsedShootTime < _bulletShootInterval ? gameTime.ElapsedGameTime.Milliseconds : 0;
         }
 
         public void TryShoot(PlayerShip playerShip)
         {
-            if (_bulletElapsedShootTime >= BulletShootInterval)
+            if (_bulletElapsedShootTime >= _bulletShootInterval)
             {
                 _playerShipPosition = new Vector2(playerShip.GetEntityRectangle().Center.X,
                                                   playerShip.GetEntityRectangle().Center.Y);
@@ -75,9 +75,9 @@ namespace StarDefenceTutorial.com.andaforce.game.service
             }
         }
 
-        public void SetFirerate(float firerate)
+        public void SetFirerate(int firerate)
         {
-            BulletShootInterval = firerate;
+            _bulletShootInterval = firerate;
         }
 
         public void SetTripleMode(bool isTripleMode)

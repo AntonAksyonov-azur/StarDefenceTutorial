@@ -1,29 +1,69 @@
-﻿namespace StarDefenceTutorial.com.andaforce.game.config
+﻿using System.IO;
+using System.Windows.Forms;
+using System.Xml.Serialization;
+
+namespace StarDefenceTutorial.com.andaforce.game.config
 {
     public class Configuration
     {
-        // Screen sizes
-        public int ScreenWidth = 720;
-        public int ScreenHeight = 480;
-
-        // PlayerShip
-        public int PlayerShipVelocity = 100;
-
-        // BulletService
-        public float PlayerShipFirerate = 0.3f;
-        public int BulletVelocity = 300;
-
-        // Powerups time values
-        public int EffectTimeIncreaseVelocity = 10000;
-        public int EffectTimeIncreaseFirerate = 10000;
-        public int EffectTimeIncreaseWeapon = 10000;
+        public ScreenConfiguration ScreenConfiguration;
+        public PlayerShipConfiguration PlayerShipConfiguration;
+        public BulletConfiguration BulletConfiguration;
+        public PowerupConfiguration PowerupConfiguration;
+        public EnemyConfiguration EnemyConfiguration;
+        public GameplayConfiguration GameplayConfiguration;
 
         //
         private static Configuration _instance;
 
-        public static Configuration GetInstance()
+        public static void UnloadConfiguration()
         {
-            return _instance ?? (_instance = new Configuration());
+            try
+            {
+                _instance = CreateDefault();
+
+                XmlSerializer serializer = new XmlSerializer(typeof(Configuration));
+                TextWriter writer = new StreamWriter("config.xml");
+                serializer.Serialize(writer, _instance);
+            }
+            catch (IOException e)
+            {
+                MessageBox.Show("Error in unloading configuration file!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public static void LoadConfiguration()
+        {
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof (Configuration));
+                TextReader reader = new StreamReader("config.xml");
+                _instance = (Configuration) serializer.Deserialize(reader);
+            }
+            catch (IOException e)
+            {
+                _instance = CreateDefault();
+
+                MessageBox.Show("Error in loading configuration file! Using default configuration", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public static Configuration Get()
+        {
+            return _instance;
+        }
+
+        private static Configuration CreateDefault()
+        {
+            _instance = new Configuration();
+            _instance.ScreenConfiguration = new ScreenConfiguration();
+            _instance.PlayerShipConfiguration = new PlayerShipConfiguration();
+            _instance.BulletConfiguration = new BulletConfiguration();
+            _instance.PowerupConfiguration = new PowerupConfiguration();
+            _instance.EnemyConfiguration = new EnemyConfiguration();
+            _instance.GameplayConfiguration = new GameplayConfiguration();
+
+            return _instance;
         }
     }
 }

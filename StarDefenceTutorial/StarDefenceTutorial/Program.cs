@@ -18,7 +18,10 @@ namespace StarDefenceTutorial
             ScreenManager.AddScreen(new RecordsScreen());
             ScreenManager.ActivateScreenByName(ScreenNames.Game);
 
-            var game = new AXNAGame(Configuration.GetInstance().ScreenWidth, Configuration.GetInstance().ScreenHeight);
+            //Configuration.UnloadConfiguration();
+            Configuration.LoadConfiguration();
+
+            var game = new AXNAGame(Configuration.Get().ScreenConfiguration.ScreenWidth, Configuration.Get().ScreenConfiguration.ScreenHeight);
             game.Run();
 
         }

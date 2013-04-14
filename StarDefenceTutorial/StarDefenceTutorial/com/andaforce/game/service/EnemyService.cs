@@ -13,7 +13,7 @@ namespace StarDefenceTutorial.com.andaforce.game.service
 {
     public class EnemyService : AbstractSpawnService
     {
-        private const float EnemyAppearsInterval = 0.5f;
+        private readonly float _enemyAppearsInterval;
         private readonly List<Enemy> _enemies = new List<Enemy>();
         public Texture2D EnemyGraphicsDeath;
         public Texture2D EnemyGraphicsMove;
@@ -23,6 +23,8 @@ namespace StarDefenceTutorial.com.andaforce.game.service
         {
             EnemyGraphicsMove = moveGraphics;
             EnemyGraphicsDeath = deathGraphics;
+
+            _enemyAppearsInterval = Configuration.Get().EnemyConfiguration.EnemyAppearsInterval;
         }
 
         public void Reset()
@@ -38,8 +40,8 @@ namespace StarDefenceTutorial.com.andaforce.game.service
                 int enemyMaxSpeed = gameplayService.GetEnemiesSpeedBasedOnLevel();
 
                 var enemy = new Enemy(
-                    Configuration.GetInstance().ScreenWidth,
-                    AXNA.Rnd.Next(0, Configuration.GetInstance().ScreenHeight),
+                    Configuration.Get().ScreenConfiguration.ScreenWidth,
+                    AXNA.Rnd.Next(0, Configuration.Get().ScreenConfiguration.ScreenHeight),
                     24, 24,
                     new Vector2(
                         AXNA.Rnd.Next(-enemyMaxSpeed, enemyMaxSpeed),
@@ -72,14 +74,14 @@ namespace StarDefenceTutorial.com.andaforce.game.service
             {
                 if (_enemies.Count < gameplayService.GetEnemiesCountBasedOnLevel())
                 {
-                    if (_enemyElapsedTime > EnemyAppearsInterval)
+                    if (_enemyElapsedTime > _enemyAppearsInterval)
                     {
                         CreateEntity();
                         _enemyElapsedTime = 0;
                     }
                     else
                     {
-                        _enemyElapsedTime += (float) gameTime.ElapsedGameTime.Milliseconds/1000;
+                        _enemyElapsedTime += gameTime.ElapsedGameTime.Milliseconds;
                     }
                 }
             }

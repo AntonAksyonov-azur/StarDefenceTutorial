@@ -43,7 +43,7 @@ namespace StarDefenceTutorial.com.andaforce.axna.entity.background
             }
         }
 
-        public void Move(int xOffset, int yOffset)
+        public void Move(float xOffset, float yOffset)
         {
             foreach (ParallaxTexture current in Textures)
             {

@@ -85,7 +85,7 @@ namespace StarDefenceTutorial.com.andaforce.game.service
             }
         }
 
-        public void MoveEnemies(int scrollSpeed)
+        public void MoveEnemies(float scrollSpeed)
         {
             foreach (Enemy e in _enemies)
             {

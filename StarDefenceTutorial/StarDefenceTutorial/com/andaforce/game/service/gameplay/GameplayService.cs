@@ -225,7 +225,7 @@ namespace StarDefenceTutorial.com.andaforce.game.service.gameplay
 
         #region Изменения игровой логики в зависимости от текущего уровня
 
-        public int GetScrollSpeedBasedOnLevel()
+        public float GetScrollSpeedBasedOnLevel()
         {
             return Level;
         }

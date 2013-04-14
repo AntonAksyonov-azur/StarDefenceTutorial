@@ -52,7 +52,7 @@ namespace StarDefenceTutorial.com.andaforce.game.service
             }
         }
 
-        public void MovePowerups(int scrollSpeed)
+        public void MovePowerups(float scrollSpeed)
         {
             foreach (Powerup e in _powerups)
             {
